@@ -1,6 +1,6 @@
-import * as db from "../db/queries";
+import * as db from "../db/queries.js";
 
-const getBooks = async (req, res) => {
+const getBooks = async (req, res, next) => {
   try {
     const books = await db.getBooks();
     res.json(books);
@@ -9,7 +9,7 @@ const getBooks = async (req, res) => {
   }
 };
 
-const getBookById = async (req, res) => {
+const getBookById = async (req, res, next) => {
   try {
     const { id } = req.body;
     const book = await db.getBookById(id);
@@ -19,16 +19,17 @@ const getBookById = async (req, res) => {
   }
 };
 
-const getBooksByTitle = async (req, res) => {
+const getBooksByTitle = async (req, res, next) => {
   try {
     const { title } = req.body;
     const book = await db.getBooksByTitle(title);
+    res.json(book);
   } catch (e) {
     next(e);
   }
 };
 
-const getBooksByAuthor = async (req, res) => {
+const getBooksByAuthor = async (req, res, next) => {
   try {
     const { author } = req.body;
     const book = await db.getBooksByAuthor(author);
@@ -38,7 +39,7 @@ const getBooksByAuthor = async (req, res) => {
   }
 };
 
-const createBook = async (req, res) => {
+const createBook = async (req, res, next) => {
   try {
     const { title, author, pages } = req.body;
     await db.createBook(title, author, pages);
@@ -48,7 +49,7 @@ const createBook = async (req, res) => {
   }
 };
 
-const updateBook = async (req, res) => {
+const updateBook = async (req, res, next) => {
   try {
     const { id, title, author, pages } = req.body;
     await db.updateBook(id, title, author, pages);
@@ -58,7 +59,7 @@ const updateBook = async (req, res) => {
   }
 };
 
-const deleteBook = async (req, res) => {
+const deleteBook = async (req, res, next) => {
   try {
     const { id } = req.body;
     await db.deleteBook(id);

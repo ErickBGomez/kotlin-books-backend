@@ -1,4 +1,4 @@
-import pool from "./pool";
+import pool from "./pool.js";
 
 const getBooks = async () => {
   const { rows } = await pool.query("SELECT * FROM books");
