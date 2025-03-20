@@ -1,7 +1,9 @@
-import { Client } from "pg";
+import pg from "pg";
 import dotenv from "dotenv";
 
 dotenv.config();
+
+const { Client } = pg;
 
 const setup = async () => {
   const { DATABASE_URL } = process.env;
