@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import booksRouter from "./routes/books.routes";
 
 dotenv.config();
 
@@ -13,9 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("Welcome to the Kotlin Books Backend!");
-});
+app.use("/api/books", booksRouter);
 
 // Start server
 app.listen(PORT, () => {
